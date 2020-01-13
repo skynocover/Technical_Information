@@ -1,0 +1,179 @@
+﻿<!DOCTYPE HTML>
+<!--
+	Story by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>ScrewSet</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		    
+    <script>
+
+        
+    function select(){
+        var m = document.getElementById('mtype').value;  
+        var t = parseInt(document.getElementById('thick').value); //板金厚度
+        
+        switch (m){
+            case '3':
+                var d = 4.5; //鎖緊深
+                var h = 3.3; //沉頭孔深
+                break;
+            case '4':
+                var d = 6;
+                var h = 4.4;
+                break;
+            case '5':
+                var d = 7.5;
+                var h = 5.4;
+                break;
+            case '6':
+                var d = 9;
+                var h = 6.5;
+                break;
+            case '8':
+                var d = 12;
+                var h = 8.6;
+                break;
+            case '10':
+                var d = 15;
+                var h = 10.8;
+                break;
+            case '12':
+                var d = 18;
+                var h = 13;
+                break;
+            case '14':
+                var d = 21;
+                var h = 15.5;
+                break;
+            case '16':
+                var d = 24;
+                var h = 21.5;
+                break;  
+            }
+
+        if ( (t-h) < 3 ){
+            alert("板金選用長度錯誤,請重新選擇");
+        }
+        
+        var l = Math.ceil(t+d-h); //螺絲長度= 板金厚度+鎖緊深-沉頭孔深
+        while (l%5 != 0) { //若螺絲長度未整除五就加深沉頭孔
+            l=l-1;
+        }
+        
+        var dd = Math.ceil(d); //鎖緊深度取值
+        while ((t-l+dd)<h){ //若沉頭孔不夠深就加深鎖緊深度
+            dd=dd+1;
+        }
+        
+        document.getElementById('deep').value = d; //所需鎖緊深度
+        document.getElementById('high').value = h; //表定沉頭孔深
+        document.getElementById('length').value = l; //螺絲選用長度
+        document.getElementById('decidehigh').value = t-l+dd; //推薦沉頭孔深
+
+    }
+    
+</script>
+		
+		
+		
+	</head>
+	<body onLoad="select()">
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="divided">
+
+					<section class="wrapper style1 align-center">
+						<div class="inner medium">
+							<h2>Screw Set</h2>
+							<form method="post" action="#">
+								<div class="field first half">
+									<label  for="name">螺絲</label>
+									<select id="mtype" onChange="select()" >
+                                        <option value="3">M3</option>
+                                        <option value="4">M4</option>
+                                        <option value="5">M5</option>
+                                        <option value="6">M6</option>
+                                        <option value="8">M8</option>
+                                        <option value="10">M10</option>
+                                        <option value="12">M12</option>
+                                        <option value="14">M14</option>
+                                        <option value="16">M16</option>
+                                    </select> 
+								</div>
+								<div class="field first half">
+									<label for="mame">選用板金厚度</label>
+									<select id="thick" onChange="select()" >
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                        <option value="20">20</option>
+                                        <option value="25" selected="true">25</option>
+                                        <option value="30">30</option>
+                                        <option value="35">35</option>
+                                        <option value="40">40</option>
+                                        <option value="45">45</option>
+                                        <option value="50">50</option>
+                                    </select> 
+									
+								</div>
+								<div class="field half first">
+									<label for="name">所需鎖緊深度</label>
+									<output id='deep'>4.5</output>
+								</div>
+								<div class="field half first">
+									<label for="name">表定沉頭孔深</label>
+									<output id ='high'></output>
+								</div>
+								<div class="field half first">
+									<label for="name">螺絲選用長度</label>
+                                    <output id = 'length'></output>
+								</div>
+								<div class="field half first">
+									<label for="name">推薦沉頭孔深</label>
+                                    <output id = 'decidehigh'></output>
+								</div>
+								
+							</form>
+						</div>
+					</section>
+			</div>
+
+		<!-- Scripts -->
+			<disable_script src="assets/js/jquery.min.js">
+<!--
+
+//-->
+</disable_script>
+			<disable_script src="assets/js/jquery.scrollex.min.js">
+<!--
+
+//-->
+</disable_script>
+			<disable_script src="assets/js/jquery.scrolly.min.js">
+<!--
+
+//-->
+</disable_script>
+			<disable_script src="assets/js/skel.min.js">
+<!--
+
+//-->
+</disable_script>
+			<disable_script src="assets/js/util.js">
+<!--
+
+//-->
+</disable_script>
+			<disable_script src="assets/js/main.js">
+<!--
+
+//-->
+</disable_script>
+
+	</body>
+</html>

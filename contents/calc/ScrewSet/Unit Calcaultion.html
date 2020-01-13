@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Unit Calculation</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		    
+    <script>
+        
+    function calc(){
+        var u = document.getElementById('unit').value;
+        var i  = parseFloat(document.getElementById('count').value);
+
+		switch (u){
+            case 'Pa':
+                var a = 1; //Pa倍率
+                var b = 1E-5;; //bar倍率
+                var k = 10.2E-6; //kgf倍率
+                var p = 0.15E-3; //psi倍率
+                break;
+            case 'bar':
+                var a = 100000; 
+                var b = 1; 
+                var k = 1.02;
+                var p = 14.5;
+                break;
+            case 'kgf':
+                var a = 98066.5; 
+                var b = 0.98; 
+                var k = 1;
+                var p = 14.22;
+                break;
+            case 'psi':
+                var a = 6894.76; 
+                var b = 68.95E-3; 
+                var k = 70.31E-3;
+                var p = 1;
+                break;           
+            }
+
+        document.getElementById('Pa').value  = (i*a).toFixed(6); 
+        document.getElementById('bar').value = (i*b).toFixed(6); 
+        document.getElementById('kgf').value = (i*k).toFixed(6); 
+        document.getElementById('psi').value = (i*p).toFixed(6);		
+    }
+    
+	</script>
+		
+	</head>
+	<body  onLoad="calc()">
+
+		<!-- Wrapper -->
+		<div id="wrapper" class="fade-in"></div>
+			<div id="wrapper" class="divided">
+					<section class="wrapper style1 align-center">
+						<div class="inner medium">
+							<h2>Unit Calculation</h2>
+							<form method="post" action="#" >
+								<div class="field half">
+									<label for="name">數值</label>
+									<input type="text" name="test" style="display:none"/>
+									<input id="count" type="text" value="1" onChange="calc()" >
+								</div>
+								<div class="field half">
+									<label for="name">選用單位</label>
+									<select id="unit" onChange="calc()">
+									<option value="Pa">Pa</option>
+									<option value="bar">bar</option>
+                                    <option value="kgf">kgf</option>
+                                    <option value="psi">psi</option>
+                                </select>
+								</div>
+								<div class="field half">
+									<label for="message">Pa</label>
+									<output id="Pa"></output>
+								</div>		
+								<div class="field half">
+									<label for="message">bar</label>
+									<output id="bar"></output>
+								</div>	
+								<div class="field half">
+									<label for="message">kgf</label>
+									<output id="kgf"></output>
+								</div>	
+								<div class="field half">
+									<label for="message">psi</label>
+									<output id="psi"></output>
+								</div>	
+							</form>
+						</div>
+					</section>					
+			</div>
+	</body>
+</html>

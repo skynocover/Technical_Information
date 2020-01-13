@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+        <title>Bolt in shear</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		
+		<script>
+        function calc() {
+            var a = parseFloat(document.getElementById('a').value);
+            var b = parseInt(document.getElementById('b').value);
+            var t = document.getElementById('ctype').value;
+        
+            switch (t) {
+                    case 'm4':
+                        var r =  8.78*a*b ;
+                        break;
+                    case 'm5':
+                        var r =  14.2*a*b ;
+                        break;
+                    case 'm6':
+                        var r =  20.1*a*b ;
+                        break;
+                    case 'm8':
+                        var r =  36.6*a*b ;
+                        break;
+		    		case 'm10':
+                        var r =  58*a*b ;
+                        break;
+		    		case 'm12':
+                        var r =  84.3*a*b ;
+                        break;
+		   			case 'm14':
+                        var r =  115*a*b ;
+                        break;
+             }
+             document.getElementById('result').value = r.toFixed(2);
+             document.getElementById('result2').value = (r*9.81).toFixed(2); 
+     	}  
+   		</script>
+	</head>
+	<body class="is-loading" onload=calc()>
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
+			        <div id="wrapper" class="divided">
+
+					<section class="wrapper style1 align-center">
+						<div class="inner medium">
+							<h2>Bolt in shear</h2>
+							<form method="post" action="#">
+							
+								<div class="field first">
+									<label for="name">材料容許剪應力(kg/mm^2)</label>
+									<input id="a" type="text" value="46.6" onblur="calc()">
+								</div>
+								
+								<div class="field half">
+									<label for="name">選用螺絲</label>
+									<select id="ctype" onchange="calc()" >
+                                    <option value="m4">M4</option>
+                                    <option value="m5">M5</option>
+                                    <option value="m6">M6</option>
+                                    <option value="m8">M8</option>
+	                                <option value="m10">M10</option>
+	                                <option value="m12">M12</option>
+	                                <option value="m14">M14</option>
+                                </select>
+								</div>
+								
+								<div class="field half">
+									<label for="name">顆數</label>
+                                    <input id="b" type="text" value="1" onchange="calc()">
+								</div>
+								<div class="field half">
+									<label for="message">容許剪力</label>
+									<output id='result'></output>kg
+								</div>
+								<div class="field half">
+									<label for="message">容許剪力</label>
+									<output id='result2'></output>N
+								</div>
+							</form>
+						</div>
+					</section>
+			    </div>
+			</div>
+	</body>
+</html>

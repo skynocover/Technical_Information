@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>angle set</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+				    
+    <script>
+        
+    function calc(){
+        var screwdia = parseFloat(document.getElementById('screwdia').value); //外徑
+        var balldia  = document.getElementById('balldia').value; //珠徑
+        var lead     = parseFloat(document.getElementById('lead').value); //導程
+
+		switch (balldia) {
+                    case '1.588':
+                        var refd =  0.3 ;
+                        break;
+					case '2':
+                        var refd =  0.4 ;
+                        break;
+                    case '2.381':
+                        var refd =  0.4 ;
+                        break;
+                    case '3.175':
+                        var refd =  0.6 ;
+                        break;
+                    case '3.969':
+                        var refd =  0.7 ;
+                        break;
+		    		case '4.762':
+                        var refd =  1.0 ;
+                        break;
+		    		case '6.35':
+                        var refd =  1.4 ;
+                        break;
+		    		case '7.144':
+                        var refd =  1.5 ;
+                        break;
+					case '7.938':
+                        var refd =  1.5 ;
+                        break;
+					case '9.525':
+                        var refd =  2 ;
+                        break;
+					case '12.7':
+                        var refd =  3 ;
+                        break;
+             }
+
+        var angle = Math.atan(lead/(screwdia+refd)/Math.PI)*180/Math.PI ;
+        document.getElementById('angle').value = angle.toFixed(3);
+    }
+	</script>
+	</head>
+
+	<body onLoad="calc()">
+		<!-- Wrapper -->
+			<div id="wrapper" class="divided">
+
+					<section class="wrapper style1 align-center">
+						<div class="inner medium">
+							<h2>angle set</h2>
+							<form method="post" action="#">
+								<div class="field half">
+									<label for="name">外徑</label>
+									<input id="screwdia" type="text" value="40" onChange="calc()">
+								</div>
+								
+								<div class="field half">
+									<label for="name">導程</label>
+									<input id="lead" type="text" value="12" onChange="calc()">
+								</div>
+								
+								<div class="field half">
+									<label for="name">珠徑</label>
+									<select id="balldia" onChange="calc()">
+									<option value="1.588">1.588</option>
+									<option value="2">2</option>
+                                    <option value="2.381">2.381</option>
+                                    <option value="3.175">3.175</option>
+                                    <option value="3.969">3.969</option>
+	                                <option value="4.762">4.762</option>
+	                                <option value="6.35" selected="true">6.35</option>
+	                                <option value="7.144">7.144</option>
+									<option value="7.938">7.938</option>
+									<option value="9.525">9.525</option>
+									<option value="12.7">12.7</option>
+                                </select>
+								</div>
+								
+								<div class="field half">
+									<label for="message">導程角</label>
+									<output id="angle"></output>
+								</div>		
+							</form>
+						</div>
+					</section>
+			</div>
+
+			<disable_script src="assets/js/jquery.min.js">
+			</disable_script>
+			<disable_script src="assets/js/jquery.scrollex.min.js">
+			</disable_script>
+			<disable_script src="assets/js/jquery.scrolly.min.js">
+			</disable_script>
+			<disable_script src="assets/js/skel.min.js">
+			</disable_script>
+			<disable_script src="assets/js/util.js">
+			</disable_script>
+			<disable_script src="assets/js/main.js">
+			</disable_script>
+	</body>
+</html>
