@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>干涉挾持力計算</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		    
+    <script>
+        
+    function calc(){
+        var item = /** @class */ (function () { //軸與筒的物件
+    	//建構子
+    		function item(ID, OD, E, v) {
+        	this.ID = ID;
+        	this.OD = OD;
+        	this.E = E;
+        	this.v = v; //蒲松氏比
+        	this.u = (Math.pow(OD / 2, 2) + Math.pow(ID / 2, 2)) / (Math.pow(OD / 2, 2) - Math.pow(ID / 2, 2)); //計算用參數
+    		}
+    		return item;
+		}());
+		var interference = /** @class */ (function () {
+    		function interference(shaft, cylinder, length, u) {
+        		this.shaft = shaft; //軸
+        		this.cylinder = cylinder; //筒
+        		this.length = length; //夾緊長度
+        		this.u = u; //摩擦係數
+    		}
+    		interference.prototype.compressive = function () {
+        		var e1 = (this.shaft.u - this.shaft.v) / this.shaft.E;
+        		var e2 = (this.cylinder.u + this.cylinder.v) / this.cylinder.E;
+				console.log(e2)
+        		return 0.001 / (e1 + e2);
+    		};
+    		interference.prototype.press = function () {
+        		return 2 * Math.PI * this.shaft.OD / 2 * this.length * this.compressive();
+    		};
+    		interference.prototype.clamping = function () {
+        		return this.u * this.press();
+    		};
+    		interference.prototype.torque = function () {
+        		return this.u * this.shaft.OD / 2 * this.press();
+    		};
+    		return interference;
+		}());
+		
+		document.getElementById('cylinderID').value = document.getElementById('shaftOD').value;
+
+		var shaft = new item(document.getElementById('shaftID').value,document.getElementById('shaftOD').value,document.getElementById('shaftE').value,document.getElementById('shaftU').value)
+		var cylinder = new item(document.getElementById('cylinderID').value,document.getElementById('cylinderOD').value,document.getElementById('cylinderE').value,parseFloat(document.getElementById('cylinderU').value))
+		var inter = new interference(shaft, cylinder,document.getElementById('clampingLength').value,document.getElementById('u').value)
+
+		console.log(shaft)
+		console.log(cylinder)
+		console.log(inter)
+		document.getElementById('compress').value = inter.compressive().toFixed(3);
+		document.getElementById('press').value = inter.press().toFixed(0);
+		document.getElementById('clamping').value = inter.clamping().toFixed(0);
+		document.getElementById('torque').value = inter.torque().toFixed(0);
+	
+	}
+	
+    
+</script>
+	</head>
+	<body onLoad="calc()">
+		<section class="wrapper style1 align-center">
+			<div class="inner medium">
+				<h3>干涉夾持力計算</h2>
+				<form method="post" action="#">
+					<!--- 軸 --->
+					<div class="field half" style="width:25%">
+						<label for="name">軸內徑(mm)</label>
+						<input id="shaftID" type="text" value="0" onChange="calc()">
+					</div>
+					<div class="field half" style="width:25%">
+						<label for="name">軸外徑(mm)</label>
+						<input id='shaftOD' type="text" value="100" onChange="calc()">
+					</div>
+					<div class="field half" style="width:25%">
+						<label for="name">軸E值(kgf/mm^2)</label>
+						<input id="shaftE" type="text" value="21000" onChange="calc()">
+					</div>
+					<div class="field half" style="width:25%">
+						<label for="name">軸蒲松氏比</label>
+						<input id='shaftU' type="text" value="0.3" onChange="calc()">
+					</div>
+					<!--- 筒 --->
+					<div class="field half" style="width:25%" style="vertical-align:middle;">
+						<label for="name">筒內徑(同軸外徑)</label>
+						<output id='cylinderID'></output>  mm
+					</div>
+					<div class="field half" style="width:25%">
+						<label for="message">筒外徑(mm)</label>
+						<input id='cylinderOD' type="text" value="200" onChange="calc()">
+					</div>
+					<div class="field half" style="width:25%">
+						<label for="name">筒E值(kgf/mm^2)</label>
+						<input id="cylinderE" type="text" value="10000" onChange="calc()">
+					</div>
+					<div class="field half" style="width:25%">
+						<label for="name">筒蒲松氏比</label>
+						<input id='cylinderU' type="text" value="0.27" onChange="calc()">
+					</div>
+					<div class="field half">
+						<label for="name">夾緊長度(mm)</label>
+						<input id='clampingLength' type="text" value="50" onChange="calc()">
+					</div>
+					<div class="field half">
+						<label for="name">摩擦係數</label>
+						<input id='u' type="text" value="0.2" onChange="calc()">
+					</div>
+					<div class="field half">
+						<label for="name">緊固壓力</label>
+						<output id='compress'></output>  kgf/mm^2
+					</div>
+					<div class="field half">
+						<label for="name">緊固力</label>
+						<output id='press'></output> kgf
+					</div>
+					<div class="field half">
+						<label for="name">夾緊力</label>
+						<output id='clamping'></output> kgf
+					</div>
+					<div class="field half">
+						<label for="name">容許扭力</label>
+						<output id='torque'></output> kgf*mm
+					</div>
+                </form>
+			</div>
+		</section>
+	</body>
+</html>

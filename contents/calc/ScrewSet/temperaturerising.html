@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>冷凍機計算</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		    
+    <script> 
+    function calc(){
+		var a = parseFloat(document.getElementById('risingRate').value);
+		var b = parseFloat(document.getElementById('temperatureDiff').value);
+		var v = parseFloat(document.getElementById('volume').value);
+		var p = parseFloat(document.getElementById('density').value);
+		var cp = parseFloat(document.getElementById('cp').value);
+		var li = parseFloat(document.getElementById('liquidInit').value);
+		var ri = parseFloat(document.getElementById('roomInit').value);
+		var stable = parseFloat(document.getElementById('stable').value);
+		var q;
+		if (stable) {
+			document.getElementById('temperatureDiff').disabled=false
+    		q = (a * b * v * p * cp) / (b - li + ri);
+		}
+		else {
+			document.getElementById('temperatureDiff').value=""
+			document.getElementById('temperatureDiff').disabled=true
+    		q = a * v * p * cp;
+		}
+
+		document.getElementById('kcal').value = q.toFixed(0);
+		document.getElementById('w').value = (q/0.86).toFixed(0);
+    }
+    
+	</script>
+	</head>
+	<body onLoad="calc()">
+		<div id="wrapper" class="divided">
+			<section class="wrapper style1 align-center">
+			<div class="inner medium">
+				<h2>溫升換算冷凍機</h2>
+				<form method="post" action="#">
+					<div class="field half" style="width:25%">
+						<label for="name">溫度上升率(℃/h)</label>
+						<input id="risingRate" type="text" value="7" onChange="calc()"></input>
+					</div>
+					<div class="field half" style="width:25%">
+						<label for="name">水箱容積(m^3)</label>
+						<input id="volume" type="text" value="0.7" onChange="calc()">
+					</div>					
+					<div class="field half" style="width:25%">
+						<label for="name">密度(kg/m^3)</label>
+						<input id="density" type="text" value="870" onChange="calc()">
+					</div>
+					<div class="field half" style="width:25%">
+						<label for="name">比熱(kcal/kg*℃)</label>
+						<input id="cp" type="text" value="0.45" onChange="calc()">
+					</div>
+					<div class="field half" style="width:25%">
+						<label for="name">最初液溫(℃)</label>
+						<input id="liquidInit" type="text" value="25" onChange="calc()">
+					</div>
+					<div class="field half" style="width:25%">
+						<label for="name">最初室溫(℃)</label>
+						<input id="roomInit" type="text" value="24.4" onChange="calc()">
+					</div>
+					<div class="field half" style="width:25%">
+						<label for="name">溫度收束</label>
+						<select id="stable" onChange="calc()">
+							<option value="1">溫度收束</option>
+							<option value="0">溫度未收束</option>														
+						</select>
+					</div>
+					<div class="field half" style="width:25%">
+						<label for="name">收束的溫升(℃)</label>
+						<input id="temperatureDiff" type="text" value="20.4" onChange="calc()">
+					</div>
+					<div class="field half">
+						<label for="name">冷凍機建議功率</label>
+						<output id="kcal" ></output>kcal/h
+					</div>
+					<div class="field half">
+						<label for="name">冷凍機建議功率</label>
+						<output id="w" ></output>w
+					</div>
+                </form>
+				</div>
+			</section>
+		</div>
+	</body>
+</html>

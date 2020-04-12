@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>WorkSet</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		    
+    <script> 
+    function calc(){
+        var od     = parseFloat(document.getElementById('od').value);
+		
+		if (document.getElementById('vcrpm').value=="chooserpm") {
+			var rpm = parseFloat(document.getElementById('input1').value);
+			var vc  = rpm*Math.PI*od/1000;
+			document.getElementById('output1').value = vc.toFixed(2);
+			document.getElementById('label1').innerHTML = "切線速度(m/min)";
+		}else if(document.getElementById('vcrpm').value=="choosevc"){
+			var vc  = parseFloat(document.getElementById('input1').value);
+			var rpm = vc*1000/Math.PI/od ;
+			document.getElementById('output1').value = rpm.toFixed(0);
+			document.getElementById('label1').innerHTML = "轉速(rpm)";
+		}
+		
+		if (document.getElementById('fvf').value=="choosevf") {
+			var vf = parseFloat(document.getElementById('input2').value);
+			var f  = vf/rpm;
+			document.getElementById('output2').value = f.toFixed(3);
+			document.getElementById('label2').innerHTML = "每轉進給(mm/rev)";
+		}else if(document.getElementById('fvf').value=="choosef"){
+			var f  = parseFloat(document.getElementById('input2').value);
+			var vf = f*rpm;
+			document.getElementById('output2').value = vf.toFixed(0);
+			document.getElementById('label2').innerHTML = "進給速度(mm/min)";
+		}
+
+        
+    }
+    
+	</script>
+	</head>
+	<body onLoad="calc()">
+		<div id="wrapper" class="divided">
+			<section class="wrapper style1 align-center">
+			<div class="inner medium">
+				<h2>加工條件換算</h2>
+				<form method="post" action="#">
+					<div class="field first">
+						<label for="name">刀具/工件外徑(mm)</label>
+						<input id="od" type="text" value="5" onChange="calc()">
+					</div>
+					<div class="field half">
+						<label for="name">輸入數值</label>
+						<input id="input1" type="text" value="2900" onChange="calc()">
+					</div>
+					<div class="field half">
+						<label for="name">單位</label>
+						<select id="vcrpm" onChange="calc()">
+							<option value="chooserpm">轉速(rpm)</option>
+							<option value="choosevc">切線速度(m/min)</option>														
+						</select>
+					</div>
+					<div class="field half">
+						<label for="name">輸入數值</label>
+						<input id="input2" type="text" value="450" onChange="calc()">
+					</div>
+					<div class="field half">
+						<label for="name">單位</label>
+						<select id="fvf" onChange="calc()">
+							<option value="choosevf">進給速度(mm/min)</option>
+							<option value="choosef">每轉進給(mm/rev)</option>
+						</select>
+					</div>
+					<div class="field half">
+						<label for="name" id="label1"></label>
+						<output id="output1"></output>
+					</div>
+						<div class="field half">
+						<label for="name" id="label2"></label>
+						<output id="output2"></output>
+					</div>
+                </form>
+				</div>
+			</section>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>鐵合金元素的影響</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		    
+    <script> 
+   
+    function calc(){
+		var characteristic = [  "antioxidant",
+                                "abrasion_resistance",
+                                "fatigue_resistance",
+                                "deoxidizer",
+                                "anti_grain",
+                                "strength",
+                                "toughness",
+                                "brittleness",
+                                "plasticity",
+                                "welding",
+                                "preservative",
+                            ];
+        var material = /** @class */ (function () {
+            function material(name, goodat, badat,link) {
+                this.name = name;
+                this.goodat = goodat;
+                this.badat = badat;
+                this.link = link;
+            }
+            return material;
+        }());
+
+        var Al = new material("Al", ["antioxidant", "abrasion_resistance", "fatigue_resistance", "deoxidizer", "anti_grain",""], ["strength", "toughness"],"https://github.com/skynocover/Wiki_for_Material/wiki/Al");
+        var C = new material("C", [""], ["anti_grain", "toughness", "plasticity", "welding", "preservative"],"https://github.com/skynocover/Wiki_for_Material/wiki/C");
+        var Co = new material("Co", ["anti_grain", "strength",""], [""],"https://github.com/skynocover/Wiki_for_Material/wiki/Co");
+        var Cr = new material("Cr", ["antioxidant", "abrasion_resistance", "anti_grain", "preservative",""], ["toughness", "plasticity"],"https://github.com/skynocover/Wiki_for_Material/wiki/Cr");
+        var Cu = new material("Cu", ["strength", "toughness", "brittleness", "preservative",""], ["plasticity"],"https://github.com/skynocover/Wiki_for_Material/wiki/Cu");
+        var H = new material("H", ["brittleness",""], [],"https://github.com/skynocover/Wiki_for_Material/wiki/H");
+        var Mn = new material("Mn", ["deoxidizer", "strength", "toughness", "plasticity",""], ["anti_grain", "welding"],"https://github.com/skynocover/Wiki_for_Material/wiki/Mn");
+        var Mo = new material("Mo", ["anti_grain", "strength", "preservative",""], ["brittleness"],"https://github.com/skynocover/Wiki_for_Material/wiki/Mo");
+        var N = new material("N", ["abrasion_resistance", "fatigue_resistance", "strength", "toughness", "welding",""], ["plasticity"],"https://github.com/skynocover/Wiki_for_Material/wiki/N");
+        var Ni = new material("Ni", ["fatigue_resistance", "anti_grain", "strength", "toughness", "preservative",""], ["antioxidant"],"https://github.com/skynocover/Wiki_for_Material/wiki/Ni");
+        var O = new material("O", [""], ["strength", "plasticity"],"https://github.com/skynocover/Wiki_for_Material/wiki/O");
+        var P = new material("P", ["preservative",""], ["anti_grain", "toughness", "plasticity", "welding"],"https://github.com/skynocover/Wiki_for_Material/wiki/P");
+        var S = new material("S", ["brittleness",""], ["toughness", "plasticity", "welding"],"https://github.com/skynocover/Wiki_for_Material/wiki/S");
+        var Si = new material("Si", ["antioxidant", "fatigue_resistance", "strength", "preservative",""], ["toughness", "plasticity", "welding"],"https://github.com/skynocover/Wiki_for_Material/wiki/Si");
+        var Ti = new material("Ti", ["deoxidizer", "anti_grain", "welding", "preservative",""], ["toughness","brittleness"],"https://github.com/skynocover/Wiki_for_Material/wiki/Ti");
+        var V = new material("V", ["abrasion_resistance", "deoxidizer", "strength", "toughness", "welding",""], [],"https://github.com/skynocover/Wiki_for_Material/wiki/V");
+        var W = new material("W", ["abrasion_resistance", "anti_grain", "strength",""], [],"https://github.com/skynocover/Wiki_for_Material/wiki/W");
+        var materials = [Al, C, Co, Cr, Cu, H, Mn, Mo, N, Ni, O, P, S, Si, Ti, V, W];
+
+        var check1 = (document.getElementById('need1').value);
+        var check2 = (document.getElementById('need2').value);
+        var check3 = (document.getElementById('noneed1').value);
+        var check4 = (document.getElementById('noneed2').value);
+
+       // str = "<a id='linkID' href=''>";
+        var result =""
+        materials.forEach(function (value) {
+            if (value.goodat.indexOf(check1) != -1 && value.goodat.indexOf(check2) != -1 && value.badat.indexOf(check3) == -1 && value.badat.indexOf(check4) == -1 ) {
+                result = "<a id='linkID' style='text-decoration:none;' href='" +  value.link+    "'>"+value.name+"   </a>" + result;
+            }
+        });
+
+        document.getElementById('result').innerHTML = result
+
+    }
+    
+	</script>
+	</head>
+	<body onLoad="calc()">
+		<div id="wrapper" class="divided">
+			<section class="wrapper style1 align-center">
+			<div class="inner medium">
+				<h2>鐵合金元素的影響</h2>
+				<form method="post" action="#">					
+					<div class="field half" style="width:25%">
+						<label for="name">需要的特性</label>
+						<select id="need1" onChange="calc()">
+                            <option value="">-</option>
+							<option value="antioxidant">抗氧化</option>
+                            <option value="abrasion_resistance">耐磨耗</option>
+                            <option value="fatigue_resistance">疲勞強度</option>
+                            <option value="deoxidizer">作為脫氧劑使用</option>
+                            <option value="anti_grain">抑制晶粒成長</option>
+                            <option value="strength">強度</option>
+                            <option value="toughness">韌性</option>
+                            <option value="brittleness">脆性</option>
+                            <option value="plasticity">可塑性</option>
+                            <option value="welding">可焊接性</option>
+                            <option value="preservative">耐腐蝕性</option>                           													
+						</select>
+                    </div>
+                    <div class="field half" style="width:25%">
+						<label for="name">需要的特性</label>
+						<select id="need2" onChange="calc()">
+                            <option value="">-</option>
+							<option value="antioxidant">抗氧化</option>
+                            <option value="abrasion_resistance">耐磨耗</option>
+                            <option value="fatigue_resistance">疲勞強度</option>
+                            <option value="deoxidizer">作為脫氧劑使用</option>
+                            <option value="anti_grain">抑制晶粒成長</option>
+                            <option value="strength">強度</option>
+                            <option value="toughness">韌性</option>
+                            <option value="brittleness">脆性</option>
+                            <option value="plasticity">可塑性</option>
+                            <option value="welding">可焊接性</option>
+                            <option value="preservative">耐腐蝕性</option>                           													
+						</select>
+                    </div>
+                    <div class="field half" style="width:25%">
+                        <label for="name">不可有的缺點</label>
+                        <select id="noneed1" onChange="calc()">
+                            <option value="">-</option>
+                            <option value="antioxidant">不抗氧化</option>
+                            <option value="abrasion_resistance">不耐磨耗</option>
+                            <option value="fatigue_resistance">疲勞強度降低</option>
+                            <option value="deoxidizer">沒辦法作為脫氧劑使用</option>
+                            <option value="anti_grain">促進晶粒成長</option>
+                            <option value="strength">強度降低</option>
+                            <option value="toughness">韌性降低</option>
+                            <option value="brittleness">脆性降低</option>
+                            <option value="plasticity">可塑性降低</option>
+                            <option value="welding">不可焊接</option>
+                            <option value="preservative">不耐腐蝕</option>                           													
+                        </select>
+                    </div>
+                    <div class="field half" style="width:25%">
+                        <label for="name">不可有的缺點</label>
+                        <select id="noneed2" onChange="calc()">
+                            <option value="">-</option>
+                            <option value="antioxidant">不抗氧化</option>
+                            <option value="abrasion_resistance">不耐磨耗</option>
+                            <option value="fatigue_resistance">疲勞強度降低</option>
+                            <option value="deoxidizer">沒辦法作為脫氧劑使用</option>
+                            <option value="anti_grain">促進晶粒成長</option>
+                            <option value="strength">強度降低</option>
+                            <option value="toughness">韌性降低</option>
+                            <option value="brittleness">脆性降低</option>
+                            <option value="plasticity">可塑性降低</option>
+                            <option value="welding">不可焊接</option>
+                            <option value="preservative">不耐腐蝕</option>                            													
+                            </select>
+                        </div>
+                    <div class="field">
+						<label for="name">建議合金元素(點選可以查看詳細)</label>
+						<output id="result" ></output>
+                    </div>
+                </form>
+				</div>
+			</section>
+		</div>
+	</body>
+</html>
