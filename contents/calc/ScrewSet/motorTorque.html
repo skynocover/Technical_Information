@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>馬達計算</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		    
+    <script> 
+    function calc(){
+		var chooseP = parseFloat(document.getElementById('chooseP').value);
+		var baseT = parseFloat(document.getElementById('baseT').value);
+		var baseRpm = parseFloat(document.getElementById('baseRpm').value);
+		var useRpm = parseFloat(document.getElementById('useRpm').value);
+		var useTorque;
+		if (useRpm > baseRpm) {
+    		useTorque = chooseP / 2 / Math.PI * 60 / useRpm * 1000;
+		}else {
+    		useTorque = baseT;
+		}
+		document.getElementById('useTorque').value = useTorque.toFixed(1);
+
+		var V = parseFloat(document.getElementById('V').value);
+		var R = parseFloat(document.getElementById('R').value);
+		var maxOD = parseFloat(document.getElementById('maxOD').value);
+		var minOD = parseFloat(document.getElementById('minOD').value);
+		var torque = R * maxOD / 2 / 1000;
+		var rpm = V * 1000 * 60 / Math.PI / minOD;
+		var P = torque * rpm * 2 * Math.PI / 60 / 1000;
+
+		document.getElementById('Torque').value = torque.toFixed(1);
+		document.getElementById('Rpm').value = rpm.toFixed(0);
+		document.getElementById('P').value = P.toFixed(2);
+    }
+    
+	</script>
+	</head>
+	<body onLoad="calc()">
+		<div id="wrapper" class="divided">
+			<section class="wrapper style1 align-center">
+			<div class="inner medium">
+				<h2>簡易計算</h2>
+				<form method="post" action="#">
+					<div class="field half" style="width:25%">
+						<label for="name">馬達功率(KW)</label>
+						<input id="chooseP" type="text" value="15" onChange="calc()"></input>
+					</div>		
+					<div class="field half" style="width:25%">
+						<label for="name">基底扭矩(Nm)</label>
+						<input id="baseT" type="text" value="142" onChange="calc()">
+					</div>
+					<div class="field half" style="width:25%">
+						<label for="name">基底轉速(rpm)</label>
+						<input id="baseRpm" type="text" value="1000" onChange="calc()">
+					</div>	
+					<div class="field half" style="width:25%">
+						<label for="name">使用轉速(rpm)</label>
+						<input id="useRpm" type="text" value="3000" onChange="calc()">
+					</div>
+					<div class="field ">
+						<label for="name">產生扭矩</label>
+						<output id="useTorque" ></output>Nm
+					</div>
+				</form>
+				<h2>研磨阻抗所需功率</h2>
+				<form method="post" action="#">
+					<div class="field half" style="width:25%">
+						<label for="name">線速度(m/s)</label>
+						<input id="V" type="text" value="45" onChange="calc()"></input>
+					</div>		
+					<div class="field half" style="width:25%">
+						<label for="name">研磨阻抗(N)</label>
+						<input id="R" type="text" value="334.5" onChange="calc()">
+					</div>
+					<div class="field half" style="width:25%">
+						<label for="name">砂輪最大外徑(mm)</label>
+						<input id="maxOD" type="text" value="510" onChange="calc()">
+					</div>	
+					<div class="field half" style="width:25%">
+						<label for="name">砂輪最小外徑(mm)</label>
+						<input id="minOD" type="text" value="410" onChange="calc()">
+					</div>
+					<div class="field half" style="width:25%">
+						<label for="name">期望扭矩</label>
+						<output id="Torque" ></output>Nm
+					</div>
+					<div class="field half" style="width:25%">
+						<label for="name">期望轉速</label>
+						<output id="Rpm" ></output>rpm
+					</div>
+					<div class="field half" style="width:25%">
+						<label for="name">期望馬達最小功率</label>
+						<output id="P" ></output>KW
+					</div>
+				</form>
+			</div>
+			</section>
+		</div>
+	</body>
+</html>
