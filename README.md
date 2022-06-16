@@ -1,5 +1,7 @@
 # Technical_Information
 
+[link](https://skynocover.github.io/Technical_Information/)
+
 ## [3.1.2] 2020-04-16
 
 ### ADD
